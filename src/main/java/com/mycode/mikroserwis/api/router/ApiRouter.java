@@ -11,6 +11,7 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.JWTAuthHandler;
 
 public class ApiRouter {
 
@@ -31,25 +32,26 @@ public class ApiRouter {
         JWTAuthOptions authConfig = new JWTAuthOptions().setKeyStore(new KeyStoreOptions()
         .setPath("./keystore.jceks").setPassword("secret"));
         JWTAuth jwt= JWTAuth.create(vertx, authConfig);
-        
-        // apiRouter.route("/api/v1/*").handler(JWTAuthHandler.create(jwt, "/api/v1/login"));
-        apiRouter.route("/api/v1/").handler(BodyHandler.create());
-        apiRouter.post("/api/v1/login").handler(ctx -> {
+
+        apiRouter.route("/api").handler(BodyHandler.create());
+        apiRouter.post("/api/login").handler(ctx -> {
             ctx.request().bodyHandler(body -> {
                 JsonObject jsonObject = new JsonObject(body.toString());
                 login(ctx,jsonObject, jwt);
-              });
+            });
         });
-        apiRouter.post("/api/v1/register").handler(ctx->{
+        apiRouter.post("/api/register").handler(ctx->{
             ctx.request().bodyHandler(body -> {
                 JsonObject jsonObject = new JsonObject(body.toString());
                 register(ctx, jsonObject, jwt);
-              });
+            });
         });
 
-        apiRouter.get("/api/v1/items").handler(itemHandler::getAllItems);
-        apiRouter.get("/api/v1/items/:id").handler(itemHandler::getItems);
-        apiRouter.post("/api/v1/items/:id").handler(itemHandler::insertItems);
+        // apiRouter.route("/api*").handler(JWTAuthHandler.create(jwt, "/api/login"));
+
+        apiRouter.get("/api/items").handler(itemHandler::getAllItems);
+        apiRouter.get("/api/items/:id").handler(itemHandler::getItems);
+        apiRouter.post("/api/items/:id").handler(itemHandler::insertItems);
 
 
         return apiRouter;

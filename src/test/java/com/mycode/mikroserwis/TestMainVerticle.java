@@ -21,4 +21,5 @@ public class TestMainVerticle {
   void verticle_deployed(Vertx vertx, VertxTestContext testContext) throws Throwable {
     testContext.completeNow();
   }
+  
 }

@@ -1,13 +1,11 @@
 package com.mycode.mikroserwis.service;
 
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import io.vertx.ext.mongo.*;
 
 import com.mycode.mikroserwis.api.model.Item;
 import com.mycode.mikroserwis.api.repository.ItemRepositry;
@@ -37,22 +35,6 @@ public class ItemServiceTest {
 
     @Mock
     private ItemRepositry itemRepositry;
-
-    @Mock 
-    MongoClient mongoClient;
-
-    JsonObject config;
-
-    @BeforeEach
-    void init(){
-        config = new JsonObject()
-        .put("connection_string", "mongodb://localhost:27017")
-        .put("db_name", "microservis")
-        .put("username", "root")
-        .put("password", "password")
-        .put("authSource", "admin");;
-    }
-
 
     @Test
     void shouldReturnAllItemsWhenGetItemsCalled(Vertx vertx, VertxTestContext testContext){

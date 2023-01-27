@@ -20,8 +20,8 @@ public class ResponseUtil {
         rc.response().setStatusCode(204).setStatusMessage("Registering successfull.");
     }
     public static void onSuccessResponseGeToken(RoutingContext rc,  JWTAuth jwtAuth, User ob){
-        String token ="Bearer " + jwtAuth.generateToken(new JsonObject(),
-        new JWTOptions().setExpiresInMinutes(3600).setSubject(ob.getLogin()));
+        String token ="Bearer " + jwtAuth.generateToken(new JsonObject().put("username", ob.getLogin()),
+        new JWTOptions().setExpiresInMinutes(3600));
         rc.response().putHeader("Content-Type", "application/json").putHeader("Authorization",token)
         .end(token);
     }
