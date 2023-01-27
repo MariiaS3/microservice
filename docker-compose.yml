@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    mongodb:
+        image: mongo
+        container_name: mongodb
+        restart: always
+        env_file:
+            - .env
+        volumes:
+            - mongodb-volume:/data/db
+        ports:
+            - "27017:27017"
+
+    mongo-seed:
+        build: ./mongo_seed
+        env_file:
+            - .env
+        links:
+            - mongodb
+        depends_on:
+            - mongodb
+
+volumes:
+    mongodb-volume:
+
+        
