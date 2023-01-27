@@ -8,7 +8,7 @@ import io.vertx.core.json.JsonObject;
 public class User {
 
     
-    private UUID id;
+    private UUID _id;
     private String login;
     private String password;
 
@@ -17,17 +17,17 @@ public class User {
     }
     
     public User(JsonObject jsonObject) {
-        this.id =UUID.fromString(jsonObject.getString("id"));
+        this._id =UUID.fromString(jsonObject.getString("_id"));
         this.login = jsonObject.getString("login");
         this.password = jsonObject.getString("password");
     }
 
 
-    public UUID getId() {
-        return id;
+    public UUID get_id() {
+        return _id;
     }
-    public void setId(UUID id) {
-        this.id = id;
+    public void set_id(UUID id) {
+        this._id = id;
     }
     public String getLogin() {
         return login;

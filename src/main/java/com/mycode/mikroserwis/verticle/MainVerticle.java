@@ -1,15 +1,8 @@
 package com.mycode.mikroserwis.verticle;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.Document;
-
-import com.mongodb.reactivestreams.client.MongoCollection;
-import com.mongodb.reactivestreams.client.MongoDatabase;
 import com.mycode.mikroserwis.api.handler.ItemHandler;
 import com.mycode.mikroserwis.api.handler.UserHandler;
-import com.mycode.mikroserwis.api.model.Item;
+
 import com.mycode.mikroserwis.api.repository.ItemRepositry;
 import com.mycode.mikroserwis.api.repository.UserRepository;
 import com.mycode.mikroserwis.api.router.ApiRouter;
@@ -17,14 +10,11 @@ import com.mycode.mikroserwis.api.service.ItemService;
 import com.mycode.mikroserwis.api.service.UserService;
 
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Future;
+
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.mongo.MongoAuthentication;
-import io.vertx.ext.auth.mongo.MongoAuthenticationOptions;
 import io.vertx.ext.mongo.*;
-import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.BodyHandler;
+
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -47,8 +37,7 @@ public class MainVerticle extends AbstractVerticle {
     final ItemHandler itemHandler = new ItemHandler(itemService);
     final UserHandler userHandler = new UserHandler(userService);
     final ApiRouter apiRouter = new ApiRouter(vertx, itemHandler, userHandler);
-
-
+    
     vertx.createHttpServer()
         .requestHandler(apiRouter.getRouter())
         .listen(8080, http -> {

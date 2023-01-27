@@ -16,7 +16,6 @@ public class ItemService {
     }
 
     public Future<List<Item>> getAllItem(){
-        System.out.println("------------------service----------------------------");
         return itemRepositry.getAllItem();
     }
 

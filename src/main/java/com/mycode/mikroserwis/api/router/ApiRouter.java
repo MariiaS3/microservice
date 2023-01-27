@@ -4,7 +4,12 @@ import com.mycode.mikroserwis.api.handler.ItemHandler;
 import com.mycode.mikroserwis.api.handler.UserHandler;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.KeyStoreOptions;
+import io.vertx.ext.auth.jwt.JWTAuth;
+import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 
 public class ApiRouter {
@@ -13,18 +18,6 @@ public class ApiRouter {
     private ItemHandler itemHandler;
     private UserHandler userHandler;
     
-
-
-    public ApiRouter(Vertx vertx, UserHandler userHandler) {
-        this.vertx = vertx;
-        this.userHandler = userHandler;
-    }
-
-    public ApiRouter(Vertx vertx, ItemHandler itemHandler) {
-        this.vertx = vertx;
-        this.itemHandler = itemHandler;
-    }
-
     public ApiRouter(Vertx vertx, ItemHandler itemHandler, UserHandler userHandler) {
         this.vertx = vertx;
         this.itemHandler = itemHandler;
@@ -35,14 +28,40 @@ public class ApiRouter {
 
         final Router apiRouter = Router.router(vertx);
 
-        apiRouter.route("/api/v1/items").handler(BodyHandler.create());
+        JWTAuthOptions authConfig = new JWTAuthOptions().setKeyStore(new KeyStoreOptions()
+        .setPath("./keystore.jceks").setPassword("secret"));
+        JWTAuth jwt= JWTAuth.create(vertx, authConfig);
+        
+        // apiRouter.route("/api/v1/*").handler(JWTAuthHandler.create(jwt, "/api/v1/login"));
+        apiRouter.route("/api/v1/").handler(BodyHandler.create());
+        apiRouter.post("/api/v1/login").handler(ctx -> {
+            ctx.request().bodyHandler(body -> {
+                JsonObject jsonObject = new JsonObject(body.toString());
+                login(ctx,jsonObject, jwt);
+              });
+        });
+        apiRouter.post("/api/v1/register").handler(ctx->{
+            ctx.request().bodyHandler(body -> {
+                JsonObject jsonObject = new JsonObject(body.toString());
+                register(ctx, jsonObject, jwt);
+              });
+        });
+
         apiRouter.get("/api/v1/items").handler(itemHandler::getAllItems);
-        apiRouter.get("/api/v1/items/:owner").handler(itemHandler::getItems);
-        apiRouter.post("/api/v1/items/:owner").handler(itemHandler::insertItems);
+        apiRouter.get("/api/v1/items/:id").handler(itemHandler::getItems);
+        apiRouter.post("/api/v1/items/:id").handler(itemHandler::insertItems);
 
 
         return apiRouter;
 
     }
 
+    public void login(RoutingContext rc,JsonObject jsonObject, JWTAuth jwt){
+        userHandler.login(rc,jsonObject, jwt);
+    }
+
+    public void register(RoutingContext rc,JsonObject jsonObject, JWTAuth jwt){
+        userHandler.register(rc,jsonObject, jwt);
+    }
+   
 }

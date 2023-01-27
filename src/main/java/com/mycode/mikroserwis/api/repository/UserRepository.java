@@ -1,7 +1,6 @@
 package com.mycode.mikroserwis.api.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 import com.mycode.mikroserwis.api.model.User;
 
@@ -27,12 +26,13 @@ public class UserRepository {
     }
 
     public Future<User> insertUser(User user){
+        UUID uuid = UUID.randomUUID();
+        user.set_id(uuid);
         Future<String> uFuture = mongoClient.insert("user", JsonObject.mapFrom(user)); 
 
         return uFuture.flatMap(result ->{
-            JsonObject jsonObject = new JsonObject().put("id", result);
+            JsonObject jsonObject = new JsonObject().put("_id", uuid.toString());
             User newUser = new User(jsonObject);
-
             return Future.succeededFuture(newUser);
         });
         

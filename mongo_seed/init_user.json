@@ -1,7 +1,12 @@
 [
     {
-      "id": "6210b1a3-2499-446d-a687-cce010a49864",
+      "_id": "6210b1a3-2499-446d-a687-cce010a49864",
       "login": "user@domain.com",
+      "password": "SomePassword1"
+    },
+    {
+      "_id": "a68a558f-3736-48c7-bab0-ab4b0872b1a4",
+      "login": "user2@domain.com",
       "password": "SomePassword1"
     }
   ]

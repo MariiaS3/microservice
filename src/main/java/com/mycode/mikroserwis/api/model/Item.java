@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Item {
 
-    private UUID id;
+    private UUID _id;
     private UUID owner;
     private String name;
 
@@ -16,16 +16,16 @@ public class Item {
 
     }
     public Item(JsonObject jsonObject) {
-        this.id =UUID.fromString(jsonObject.getString("id"));
+        this._id =UUID.fromString(jsonObject.getString("_id"));
         this.owner =UUID.fromString(jsonObject.getString("owner"));
         this.name = jsonObject.getString("name");
     }
 
-    public UUID getId() {
-        return id;
+    public UUID get_id() {
+        return _id;
     }
-    public void setId(UUID id) {
-        this.id = id;
+    public void set_id(UUID id) {
+        this._id = id;
     }
     public UUID getOwner() {
         return owner;

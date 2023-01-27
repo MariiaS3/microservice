@@ -2,6 +2,7 @@ package com.mycode.mikroserwis.api.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.mycode.mikroserwis.api.model.Item;
 
@@ -20,11 +21,10 @@ public class ItemRepositry {
 
     public Future<List<Item>> getAllItem(){
         
-        System.out.println("------------------repository----------------------------");
         JsonObject jsonObject = new JsonObject();
-
+        
         Future<List<JsonObject>> jFuture = mongoClient.find("item", jsonObject);
-       
+        
         return jFuture.flatMap(result ->{
             List<Item> items = new ArrayList<>();
             result.forEach((item) -> {
@@ -33,7 +33,7 @@ public class ItemRepositry {
             return Future.succeededFuture(items);
         });
     }
-
+    
     public Future<List<Item>> getItemByOwner(String owner){
         JsonObject jsonObject = new JsonObject().put("owner", owner);
 
@@ -41,18 +41,19 @@ public class ItemRepositry {
 
         return jFuture.flatMap(result ->{
             List<Item> items = new ArrayList<>();
-            result.forEach(item -> items.add(new Item(item)));
-
+            result.forEach(item -> {
+                items.add(new Item(item));
+            });
             return Future.succeededFuture(items);
         });
     }
 
     public Future<Item> insertItem(Item item){
+        UUID uuid = UUID.randomUUID();
+        item.set_id(uuid);
         Future<String> iFuture = mongoClient.insert("item", new JsonObject().mapFrom(item));
         return iFuture.flatMap(result ->{
-            JsonObject jsonObject = new JsonObject().put("id", result);
-            Item newItem = new Item(jsonObject);
-
+            Item newItem = item;
             return Future.succeededFuture(newItem);
         });
     }
