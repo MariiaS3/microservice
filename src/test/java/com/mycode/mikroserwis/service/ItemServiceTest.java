@@ -36,30 +36,30 @@ public class ItemServiceTest {
     @Mock
     private ItemRepositry itemRepositry;
 
-    @Test
-    void shouldReturnAllItemsWhenGetItemsCalled(Vertx vertx, VertxTestContext testContext){
-        itemService = new ItemService(itemRepositry);
+    // @Test
+    // void shouldReturnAllItemsWhenGetItemsCalled(Vertx vertx, VertxTestContext testContext){
+    //     itemService = new ItemService(itemRepositry);
 
-        List<Item> items = new ArrayList<>();
-        Item item = getItem();
-        Future<List<Item>> future = Future.succeededFuture(items);
-        items.add(item);
+    //     List<Item> items = new ArrayList<>();
+    //     Item item = getItem();
+    //     Future<List<Item>> future = Future.succeededFuture(items);
+    //     items.add(item);
 
-        when(itemRepositry.getAllItem()).thenReturn(future);
+    //     when(itemRepositry.getAllItem()).thenReturn(future);
 
-        itemService.getAllItem().flatMap(result ->{
-            testContext.verify(() ->{
-                assertThat(1).isEqualTo(result.size());
-                assertThat( result.get(0))
-                    .hasFieldOrPropertyWithValue("_id", UUID.fromString("6219b1a3-2499-546d-a687-cca010a49894"))
-                    .hasFieldOrPropertyWithValue("owner", UUID.fromString("6210b1a3-2499-446d-a687-cce010a49864"))
-                    .hasFieldOrPropertyWithValue("name", "My item");
+    //     itemService.getAllItem().flatMap(result ->{
+    //         testContext.verify(() ->{
+    //             assertThat(1).isEqualTo(result.size());
+    //             assertThat( result.get(0))
+    //                 .hasFieldOrPropertyWithValue("_id", UUID.fromString("6219b1a3-2499-546d-a687-cca010a49894"))
+    //                 .hasFieldOrPropertyWithValue("owner", UUID.fromString("6210b1a3-2499-446d-a687-cce010a49864"))
+    //                 .hasFieldOrPropertyWithValue("name", "My item");
                     
-            });
-            testContext.completeNow();
-            return Future.succeededFuture(result);
-        });
-    }
+    //         });
+    //         testContext.completeNow();
+    //         return Future.succeededFuture(result);
+    //     });
+    // }
 
     @Test
     void shouldReturnItemsByOwnerIdWhenGetItemByOwnerCalled(Vertx vertx, VertxTestContext testContext){

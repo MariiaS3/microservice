@@ -16,11 +16,11 @@ public class ItemHandler {
     }
     
 
-    public void getAllItems(RoutingContext rc){
-        itemService.getAllItem()
-        .onSuccess(success -> ResponseUtil.onSuccessResponse(rc, success))
-        .onFailure(throwable -> ResponseUtil.onErrorResponse(rc, throwable));
-    }
+    // public void getAllItems(RoutingContext rc){
+    //     itemService.getAllItem()
+    //     .onSuccess(success -> ResponseUtil.onSuccessResponse(rc, success))
+    //     .onFailure(throwable -> ResponseUtil.onErrorResponse(rc, throwable));
+    // }
 
 
     public void getItems(RoutingContext rc){

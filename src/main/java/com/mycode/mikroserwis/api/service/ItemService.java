@@ -15,9 +15,9 @@ public class ItemService {
         this.itemRepositry = itemRepositry;
     }
 
-    public Future<List<Item>> getAllItem(){
-        return itemRepositry.getAllItem();
-    }
+    // public Future<List<Item>> getAllItem(){
+    //     return itemRepositry.getAllItem();
+    // }
 
     public Future<List<Item>> getItemByOwner(String owner){
         return itemRepositry.getItemByOwner(owner);

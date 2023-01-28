@@ -19,20 +19,20 @@ public class ItemRepositry {
         this.mongoClient = mongoClient;
     }
 
-    public Future<List<Item>> getAllItem(){
+    // public Future<List<Item>> getAllItem(){
         
-        JsonObject jsonObject = new JsonObject();
+    //     JsonObject jsonObject = new JsonObject();
         
-        Future<List<JsonObject>> jFuture = mongoClient.find("item", jsonObject);
+    //     Future<List<JsonObject>> jFuture = mongoClient.find("item", jsonObject);
         
-        return jFuture.flatMap(result ->{
-            List<Item> items = new ArrayList<>();
-            result.forEach((item) -> {
-                items.add(new Item(item));
-            });
-            return Future.succeededFuture(items);
-        });
-    }
+    //     return jFuture.flatMap(result ->{
+    //         List<Item> items = new ArrayList<>();
+    //         result.forEach((item) -> {
+    //             items.add(new Item(item));
+    //         });
+    //         return Future.succeededFuture(items);
+    //     });
+    // }
     
     public Future<List<Item>> getItemByOwner(String owner){
         JsonObject jsonObject = new JsonObject().put("owner", owner);

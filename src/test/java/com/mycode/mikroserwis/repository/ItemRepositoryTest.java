@@ -41,19 +41,19 @@ public class ItemRepositoryTest {
         .put("authSource", "admin");;
     }
 
-    @Test
-    void shouldReturnAllItems(Vertx vertx, VertxTestContext testContext){
-        MongoClient mongoClient = MongoClient.createShared(vertx, config);
-        itemRepositry = new ItemRepositry(mongoClient);
+    // @Test
+    // void shouldReturnAllItems(Vertx vertx, VertxTestContext testContext){
+    //     MongoClient mongoClient = MongoClient.createShared(vertx, config);
+    //     itemRepositry = new ItemRepositry(mongoClient);
 
-        itemRepositry.getAllItem().flatMap(result ->{
-            testContext.verify(() ->{
-                Assertions.assertEquals(result.size(), 2);
-            });
-            testContext.completeNow();
-            return Future.succeededFuture(result);
-        });
-    }
+    //     itemRepositry.getAllItem().flatMap(result ->{
+    //         testContext.verify(() ->{
+    //             Assertions.assertEquals(result.size(), 2);
+    //         });
+    //         testContext.completeNow();
+    //         return Future.succeededFuture(result);
+    //     });
+    // }
 
     @Test
     void shouldReturnItemsByOwnerId(Vertx vertx, VertxTestContext testContext){

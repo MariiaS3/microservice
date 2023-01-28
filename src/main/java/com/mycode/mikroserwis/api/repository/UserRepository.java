@@ -26,7 +26,7 @@ public class UserRepository {
                 }else{
                     byte[] decodedBytes = Base64.getDecoder().decode(res.getString("password"));
                     String resPassword = new String(decodedBytes);
-                    if(resPassword == password){
+                    if(resPassword.equals(password)){
                         User user = new User(res);
                         return Future.succeededFuture(user);
                     }else{
