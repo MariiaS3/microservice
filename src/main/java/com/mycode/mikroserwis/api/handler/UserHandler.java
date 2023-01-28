@@ -25,7 +25,7 @@ public class UserHandler {
         userService.getUserByLogin(jsonObject.getString("login"), jsonObject.getString("password"))
                 .onSuccess(success -> {
                     String token = "Bearer " + jwt.generateToken(new JsonObject().put("username", success.getLogin()).put("_id", success.get_id().toString()),
-                            new JWTOptions().setExpiresInMinutes(1));
+                            new JWTOptions().setExpiresInMinutes(60));
                     ResponseUtil.onSuccessResponseGeToken(rc, token, success);
                 })
                 .onFailure(throwable -> ResponseUtil.onErrorResponseLogin(rc, throwable));
