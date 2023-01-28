@@ -40,9 +40,9 @@ public class UserRepositoryTest {
         User user = getUser();
         Future<User> future = Future.succeededFuture(user);
 
-        when(userRepository.getUserByLogin(any())).thenReturn(future);
+        when(userRepository.getUserByLogin(any(), any())).thenReturn(future);
 
-        userService.getUserByLogin("user@domain.com").flatMap(result ->{
+        userService.getUserByLogin("user@domain.com","SomePassword1").flatMap(result ->{
             testContext.verify(() ->{
                 assertThat(result).isNotNull();
                 assertThat( result.getLogin()).isEqualTo("user@domain.com");

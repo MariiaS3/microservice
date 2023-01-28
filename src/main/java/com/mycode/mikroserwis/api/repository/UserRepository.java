@@ -1,5 +1,6 @@
 package com.mycode.mikroserwis.api.repository;
 
+import java.util.Base64;
 import java.util.UUID;
 
 import com.mycode.mikroserwis.api.model.User;
@@ -15,26 +16,48 @@ public class UserRepository {
         this.mongoClient = mongoClient;
     }
 
-    public Future<User> getUserByLogin(String login){
+    public Future<User> getUserByLogin(String login, String password) {
         JsonObject jsonObject = new JsonObject().put("login", login);
         
-        Future<JsonObject> jFuture = mongoClient.findOne("user", jsonObject, null);
-        return  jFuture.flatMap(result -> {
-            User user = new User(result);
-            return Future.succeededFuture(user);
+        return mongoClient.findOne("user", jsonObject, null).flatMap(res ->{
+            try{
+                if(res == null){
+                    return Future.failedFuture("Not found");
+                }else{
+                    byte[] decodedBytes = Base64.getDecoder().decode(res.getString("password"));
+                    String resPassword = new String(decodedBytes);
+                    if(resPassword == password){
+                        User user = new User(res);
+                        return Future.succeededFuture(user);
+                    }else{
+                        return Future.failedFuture("Wrong password");
+                    }
+
+                }
+            }catch(Exception ex){
+                return Future.failedFuture(ex);
+           }
         });
     }
 
     public Future<User> insertUser(User user){
+
         UUID uuid = UUID.randomUUID();
         user.set_id(uuid);
-        Future<String> uFuture = mongoClient.insert("user", JsonObject.mapFrom(user)); 
-
-        return uFuture.flatMap(result ->{
-            JsonObject jsonObject = new JsonObject().put("_id", uuid.toString());
-            User newUser = new User(jsonObject);
-            return Future.succeededFuture(newUser);
+        JsonObject jsonObject = new JsonObject().put("login", user.getLogin());
+        
+        return mongoClient.findOne("user", jsonObject, null).flatMap(res ->{
+                if(res == null){
+                    return  mongoClient.insert("user", JsonObject.mapFrom(user)).flatMap(result ->{
+                        JsonObject jObject = new JsonObject().put("_id", uuid.toString());
+                        User newUser = new User(jObject);
+                        return Future.succeededFuture(newUser);
+                    }); 
+                }else{
+                    return Future.failedFuture("User already exist");
+                }
         });
+       
         
     }
 

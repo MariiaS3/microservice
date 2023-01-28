@@ -13,8 +13,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Future<User> getUserByLogin(String login){
-        return userRepository.getUserByLogin(login);
+    public Future<User> getUserByLogin(String login, String password){
+        return userRepository.getUserByLogin(login, password);
     }
 
     public Future<User> insertUser(User user){

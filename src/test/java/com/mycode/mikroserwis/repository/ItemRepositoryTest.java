@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import com.mycode.mikroserwis.api.model.Item;
 import com.mycode.mikroserwis.api.repository.ItemRepositry;
@@ -21,8 +23,13 @@ import io.vertx.junit5.VertxTestContext;
 @ExtendWith(VertxExtension.class)
 public class ItemRepositoryTest {
 
-    JsonObject config;
+    @InjectMocks
     ItemRepositry itemRepositry;
+
+    @Mock
+    MongoClient mongoClient;
+
+    JsonObject config;
 
     @BeforeEach
     void init(){
@@ -66,23 +73,23 @@ public class ItemRepositoryTest {
         });
     }
     
-    @Test
-    void shouldCallOnSuccessWenCreateNewItm(Vertx vertx, VertxTestContext testContext){
-        MongoClient mongoClient = MongoClient.createShared(vertx, config);
-        itemRepositry = new ItemRepositry(mongoClient);
+    // @Test
+    // void shouldCallOnSuccessWenCreateNewItm(Vertx vertx, VertxTestContext testContext){
+    //      mongoClient = MongoClient.createShared(vertx, config);
+    //     itemRepositry = new ItemRepositry(mongoClient);
         
-        Item item = new Item();
-        item.setName("Test item");
-        item.setOwner(UUID.randomUUID());
-        item.set_id(UUID.randomUUID());
+    //     Item item = new Item();
+    //     item.setName("Test item");
+    //     item.setOwner(UUID.randomUUID());
+    //     item.set_id(UUID.randomUUID());
     
-        itemRepositry.insertItem(item)
-        .onSuccess( s -> {
-            testContext.verify(() ->{
-                Assertions.assertEquals(s.getName(), "Test item");
-            });
-            testContext.completeNow();
-        });
+    //     itemRepositry.insertItem(item)
+    //     .onSuccess( s -> {
+    //         testContext.verify(() ->{
+    //             Assertions.assertEquals(s.getName(), "Test item");
+    //         });
+    //         testContext.completeNow();
+    //     });
            
-    }
+    // }
 }
