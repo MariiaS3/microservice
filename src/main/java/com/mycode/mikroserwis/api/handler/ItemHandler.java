@@ -15,7 +15,7 @@ public class ItemHandler {
         this.itemService = userService;
     }
     
-
+    // this function returns all items(used for tests)
     // public void getAllItems(RoutingContext rc){
     //     itemService.getAllItem()
     //     .onSuccess(success -> ResponseUtil.onSuccessResponse(rc, success))

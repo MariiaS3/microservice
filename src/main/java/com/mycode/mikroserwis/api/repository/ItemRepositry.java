@@ -19,6 +19,7 @@ public class ItemRepositry {
         this.mongoClient = mongoClient;
     }
 
+    // this function returns all items(used for tests)
     // public Future<List<Item>> getAllItem(){
         
     //     JsonObject jsonObject = new JsonObject();
