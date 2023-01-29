@@ -1,0 +1,8 @@
+docker-compose up --build -d
+mvn clean package
+java -jar target/mikroserwis-1.0.0-SNAPSHOT-fat.jar                 
+
+
+
+// docker build -t microservice-api .
+// docker run  -p 8080:8080 mcroservice-api

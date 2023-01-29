@@ -1,4 +1,4 @@
-package com.mycode.mikroserwis.verticle;
+package com.mycode.mikroserwis;
 
 import com.mycode.mikroserwis.api.handler.ItemHandler;
 import com.mycode.mikroserwis.api.handler.UserHandler;
