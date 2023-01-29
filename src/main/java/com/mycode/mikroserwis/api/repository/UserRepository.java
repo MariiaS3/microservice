@@ -1,5 +1,8 @@
 package com.mycode.mikroserwis.api.repository;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.UUID;
 
@@ -24,15 +27,21 @@ public class UserRepository {
                 if(res == null){
                     return Future.failedFuture("Not found");
                 }else{
-                    byte[] decodedBytes = Base64.getDecoder().decode(res.getString("password"));
-                    String resPassword = new String(decodedBytes);
-                    if(resPassword.equals(password)){
+                    String resPassword = "";
+                    try{
+                        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                        byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+                        resPassword =  Base64.getEncoder().encodeToString(encodedhash);
+                    }catch(NoSuchAlgorithmException ex){
+                
+                    }
+                    if(resPassword.equals(res.getString("password"))){
                         User user = new User(res);
                         return Future.succeededFuture(user);
                     }else{
                         return Future.failedFuture("Wrong password");
                     }
-
+                
                 }
             }catch(Exception ex){
                 return Future.failedFuture(ex);

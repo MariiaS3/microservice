@@ -1,5 +1,8 @@
 package com.mycode.mikroserwis.api.handler;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 
@@ -45,7 +48,13 @@ public class UserHandler {
         User user = new User();
 
             user = jsonObject.mapTo(User.class);
-            user.setPassword(Base64.getEncoder().encodeToString(user.getPassword().getBytes()));
+            try{
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] encodedhash = digest.digest(user.getPassword().getBytes(StandardCharsets.UTF_8));
+                user.setPassword(Base64.getEncoder().encodeToString(encodedhash));
+            }catch(NoSuchAlgorithmException ex){
+                
+            }
         return user;
     }
 }
