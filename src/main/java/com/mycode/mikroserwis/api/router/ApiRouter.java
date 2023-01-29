@@ -52,6 +52,7 @@ public class ApiRouter {
 
         apiRouter.route("/api*").handler(JWTAuthHandler.create(jwt, "/api/login"));
 
+        // this is the endpoint that returns all items(used for tests)
         // apiRouter.get("/api/items").handler(itemHandler::getAllItems);
         apiRouter.get("/api/items/:id").handler(itemHandler::getItems);
         apiRouter.post("/api/items/:id").handler(itemHandler::insertItems);
