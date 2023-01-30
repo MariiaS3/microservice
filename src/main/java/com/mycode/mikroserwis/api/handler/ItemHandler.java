@@ -1,7 +1,7 @@
 package com.mycode.mikroserwis.api.handler;
 
 import java.util.UUID;
-
+import io.vertx.core.json.JsonObject;
 import com.mycode.mikroserwis.api.model.Item;
 import com.mycode.mikroserwis.api.service.ItemService;
 import com.mycode.mikroserwis.util.ResponseUtil;
@@ -32,9 +32,9 @@ public class ItemHandler {
     }
 
 
-    public void insertItems(RoutingContext rc){
+   public void insertItems(RoutingContext rc, JsonObject jsonObject){
         String owner  = rc.pathParam("id");
-        Item item = mapRequestBodyToItem(rc);
+        Item item = mapRequestBodyToItem(jsonObject);
         item.setOwner(UUID.fromString(owner));
 
         itemService.insertItem(item)
@@ -42,17 +42,14 @@ public class ItemHandler {
         .onFailure(throwable -> ResponseUtil.onErrorResponse(rc, throwable));
     }
 
-    private Item mapRequestBodyToItem(RoutingContext rc){
+
+    private Item mapRequestBodyToItem(JsonObject jsonObject){
         Item item = new Item();
 
-        try{
-            item = rc.getBodyAsJson().mapTo(Item.class);
-        }catch(IllegalArgumentException ex){
-            ResponseUtil.onErrorResponse(rc, ex);
-        }
-
+        item = jsonObject.mapTo(Item.class);
         return item;
     }
+
 
     
 }
