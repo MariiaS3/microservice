@@ -48,6 +48,8 @@ A microservice that, using the REST API, made it possible to register, log in, l
   
 ==== Example requests:
 
+```diff
+
 ```
   POST localhost:8080/api/login
         Content-Type: application/json
@@ -83,6 +85,7 @@ A microservice that, using the REST API, made it possible to register, log in, l
         "owner": "6210b1a3-2499-446d-a687-cce010a49864",
         "name": "My item"
     }
+```
 ```
 
 == Running the application locally
