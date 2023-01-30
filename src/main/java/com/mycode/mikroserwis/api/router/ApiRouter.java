@@ -53,7 +53,12 @@ public class ApiRouter {
         // this is the endpoint that returns all items(used for tests)
         // apiRouter.get("/api/items").handler(itemHandler::getAllItems);
         apiRouter.get("/api/items/:id").handler(itemHandler::getItems);
-        apiRouter.post("/api/items/:id").handler(itemHandler::insertItems);
+        apiRouter.post("/api/items/:id").handler(ctx->{
+            ctx.request().bodyHandler(body -> {
+                JsonObject jsonObject = new JsonObject(body.toString());
+                itemHandler.insertItems(ctx, jsonObject);
+            });
+        });
 
 
         return apiRouter;
