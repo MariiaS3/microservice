@@ -49,7 +49,6 @@ A microservice that, using the REST API, made it possible to register, log in, l
 ==== Example requests:
 
 ```diff
-
 ```
   POST localhost:8080/api/login
         Content-Type: application/json
