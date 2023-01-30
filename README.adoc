@@ -17,8 +17,14 @@ A microservice that, using the REST API, made it possible to register, log in, l
   *  name: sting
 
 == Endpoints:
-* /api
-    - /api/login
+* /api/login
+    - POST - unauthorized login endpoint for users
+* /api/register 
+    - POST - unauthorized registration endpoint for users
+* /api/items/:id
+    - GET - an authorized endpoint for retrieving a list of user items
+* /api/items/:id
+    - POST - an authorized endpoint to create an item for the user
   
 
 image:https://img.shields.io/badge/vert.x-4.3.7-purple.svg[link="https://vertx.io"]
