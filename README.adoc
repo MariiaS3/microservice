@@ -2,26 +2,26 @@
 
 This application was generated using http://start.vertx.io
 
-= Descryption
+=== Descryption
 A microservice that, using the REST API, made it possible to register, log in, log out, download lists of your items, attached to the item.
 
-== Requirements:
+==== Requirements:
 * Microservice based on the Vert.x library (https://vertx.io/)
 * MongoDB database
 * JWT authorithation (https://vertx.io/docs/vertx-auth-jwt/java/)
 * Unit tests
 
-== The User object consists of:
+==== The User object consists of:
   *  id: UUID
   *  login: string
   *  password: encrypted string
 
-== The Item object consists of:
+==== The Item object consists of:
   *  id: UUID
   *  owner: UUID (user id)
   *  name: sting
 
-== Endpoints:
+==== Endpoints:
 * /api/login
 ```
     - POST - unauthorized login endpoint for users
