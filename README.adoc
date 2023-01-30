@@ -90,7 +90,6 @@ A microservice that, using the REST API, made it possible to register, log in, l
         Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InVzZXJAZG9tYWluLmNvbSIsIl9pZCI6IjYyMTBiMWEzLTI0OTktNDQ2ZC1hNjg3LWNjZTAxMGE0OTg2NCIsImlhdCI6MTY3NTA3MTAwOSwiZXhwIjoxNjc1MDc0NjA5fQ.Sri_STBZQM5h_PuEZGQs3cbvFABTWf4_5qaw-94iJPk
         
     {
-        "owner": "6210b1a3-2499-446d-a687-cce010a49864",
         "name": "My item"
     }
 ```
