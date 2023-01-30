@@ -17,10 +17,11 @@ A microservice that, using the REST API, made it possible to register, log in, l
   *  name: sting
 
 == Endpoints:
-  ```
-  * /api
-    /api/login
-  ```
+```
+* /api
+```
+    - /api/login
+  
 
 image:https://img.shields.io/badge/vert.x-4.3.7-purple.svg[link="https://vertx.io"]
 
