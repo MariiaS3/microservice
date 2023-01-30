@@ -23,14 +23,18 @@ A microservice that, using the REST API, made it possible to register, log in, l
 * Unit tests
 
 ==== The User object consists of:
+```  
   *  id: UUID
   *  login: string
   *  password: encrypted string
+```
+
 ==== The Item object consists of:
+``` 
   *  id: UUID
   *  owner: UUID (user id)
   *  name: sting
-  
+```  
 ==== Endpoints:
 * /api/login
     - `POST` - unauthorized login endpoint for users
