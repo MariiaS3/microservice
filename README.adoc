@@ -5,6 +5,13 @@ This application was generated using http://start.vertx.io
 == Descryption
 A microservice that, using the REST API, made it possible to register, log in, log out, download lists of your items, attached to the item.
 
+==== Requirements:
+
+* Microservice based on the Vert.x library (https://vertx.io/)
+* MongoDB database
+* JWT authorithation (https://vertx.io/docs/vertx-auth-jwt/java/)
+* Unit tests
+
 === Technology:
     * Java
     * Vert.x library: 4.3.7
@@ -15,12 +22,6 @@ A microservice that, using the REST API, made it possible to register, log in, l
     * JUnit: 5
     * Mockito: 2.19.0
 
-==== Requirements:
-
-* Microservice based on the Vert.x library (https://vertx.io/)
-* MongoDB database
-* JWT authorithation (https://vertx.io/docs/vertx-auth-jwt/java/)
-* Unit tests
 
 ==== The User object consists of:
 ```  
