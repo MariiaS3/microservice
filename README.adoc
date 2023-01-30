@@ -31,10 +31,13 @@ A microservice that, using the REST API, made it possible to register, log in, l
 * /api/items/:id
     - POST - an authorized endpoint to create an item for the user
   
-== Example requests:
 
-== Building
-
+== Running the application locally
+  
+Start MongoDB with docker-compose
+```
+docker-compose up  --build -d
+```
 To launch your tests:
 ```
 ./mvnw clean test
@@ -47,7 +50,7 @@ To package your application:
 
 To run your application:
 ```
-./mvnw clean compile exec:java
+java -jar target/mikroserwis-1.0.0-SNAPSHOT-fat.jar
 ```
 
 == Help
