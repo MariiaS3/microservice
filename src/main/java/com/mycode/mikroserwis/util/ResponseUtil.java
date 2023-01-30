@@ -24,8 +24,9 @@ public class ResponseUtil {
     }
 
     public static void onSuccessResponseGeToken(RoutingContext rc,  String token, User ob){
+        JsonObject jtoken = new JsonObject().put("token", token);
         rc.response().putHeader("Content-Type", "application/json").putHeader("Authorization",token)
-        .end(token);
+        .end(Json.encodePrettily(jtoken));
     }
     public static void onErrorResponseLogin(RoutingContext rc,  Object ob){
         rc.response().setStatusCode(404).setStatusMessage("Wrong password or login");
