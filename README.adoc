@@ -2,7 +2,7 @@
 
 This application was generated using http://start.vertx.io
 
-=== Descryption
+== Descryption
 A microservice that, using the REST API, made it possible to register, log in, log out, download lists of your items, attached to the item.
 
 ==== Requirements:
