@@ -17,9 +17,7 @@ A microservice that, using the REST API, made it possible to register, log in, l
   *  name: sting
 
 == Endpoints:
-```
 * /api
-```
     - /api/login
   
 
