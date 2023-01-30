@@ -5,6 +5,15 @@ This application was generated using http://start.vertx.io
 == Descryption
 A microservice that, using the REST API, made it possible to register, log in, log out, download lists of your items, attached to the item.
 
+=== Technology:
+    * Java
+    * Vert.x library: 4.3.7
+    * MongoDB
+    * JWTAuth
+ - Tests:
+    * JUnit: 5
+    * Mockito: 2.19.0
+
 ==== Requirements:
 * Microservice based on the Vert.x library (https://vertx.io/)
 * MongoDB database
@@ -12,28 +21,26 @@ A microservice that, using the REST API, made it possible to register, log in, l
 * Unit tests
 
 ==== The User object consists of:
+ ```
   *  id: UUID
   *  login: string
   *  password: encrypted string
-
+```
 ==== The Item object consists of:
+ ```
   *  id: UUID
   *  owner: UUID (user id)
   *  name: sting
-
+ ```
 ==== Endpoints:
 * /api/login
-```
-    - POST - unauthorized login endpoint for users
-```
+    - `POST` - unauthorized login endpoint for users
 * /api/register 
-   ```
-   - POST - unauthorized registration endpoint for users
-   ```
+   - `POST` - unauthorized registration endpoint for users
 * /api/items/:id
-    - GET - an authorized endpoint for retrieving a list of user items
+    - `GET` - an authorized endpoint for retrieving a list of user items
 * /api/items/:id
-    - POST - an authorized endpoint to create an item for the user
+    - `POST` - an authorized endpoint to create an item for the user
   
 
 == Running the application locally
