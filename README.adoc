@@ -1,4 +1,4 @@
-=== Microservice
+# Microservice
 
 This application was generated using http://start.vertx.io
 
