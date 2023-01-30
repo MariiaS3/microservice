@@ -10,7 +10,7 @@ A microservice that, using the REST API, made it possible to register, log in, l
     * Vert.x library: 4.3.7
     * MongoDB
     * JWTAuth
-= Tests:
+== Tests:
     * JUnit: 5
     * Mockito: 2.19.0
 
