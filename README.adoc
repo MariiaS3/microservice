@@ -1,10 +1,15 @@
+=== Microservice
+
+This application was generated using http://start.vertx.io
+
 = Descryption
 A microservice that, using the REST API, made it possible to register, log in, log out, download lists of your items, attached to the item.
 
-== Features:
+== Requirements:
 * Microservice based on the Vert.x library (https://vertx.io/)
 * MongoDB database
 * JWT authorithation (https://vertx.io/docs/vertx-auth-jwt/java/)
+* Unit tests
 
 == The User object consists of:
   *  id: UUID
@@ -26,10 +31,7 @@ A microservice that, using the REST API, made it possible to register, log in, l
 * /api/items/:id
     - POST - an authorized endpoint to create an item for the user
   
-
-image:https://img.shields.io/badge/vert.x-4.3.7-purple.svg[link="https://vertx.io"]
-
-This application was generated using http://start.vertx.io
+== Example requests:
 
 == Building
 
